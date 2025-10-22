@@ -1,5 +1,6 @@
 from collections import defaultdict
-
+import numpy as np
+import random
 
 class MarkovText(object):
     '''Building a class MarkovText that includes functions to generate a dictionary containing key value pairs,
@@ -37,7 +38,7 @@ class MarkovText(object):
             self.get_term_dict()
 
         current_word = seed_term or random.choice(list(self.term_dict.keys()))
-        sent = current_word
+        sent = [current_word]
 
         # generate sentence
         for _ in range(term_count -1):
@@ -57,7 +58,7 @@ class MarkovText(object):
 
     # create Markov object and term dictionary
     text_gen = MarkovText(corpus)
-    term_dic = text_gen.get_term_dic()
+    term_dic = text_gen.get_term_dict()
     text_gen.generate(term_count = 12)
 
 

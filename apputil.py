@@ -47,12 +47,19 @@ class MarkovText(object):
             current_word = random.choice(followers)
             sent.append(current_word)
 
-        return ' '.join(sentence)
+        return ' '.join(sent)
     
     # set corpus 
     corpus = (
     "Healing comes from taking responsibility: to realize that it is you - and no one else - "
     "that creates your thoughts, your feelings, and your actions."
     )
-    
-    
+
+    # create Markov object and term dictionary
+    text_gen = MarkovText(corpus)
+    term_dic = text_gen.get_term_dic()
+    text_gen.generate(term_count = 12)
+
+
+
+

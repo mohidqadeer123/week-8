@@ -15,15 +15,44 @@ class MarkovText(object):
 
     def get_term_dict(self):
 
-        # your code here ...
+        '''Building a function to tokenize over the words and create a term dictionary'''
+        
+        words = self.corpus.split()
 
-        self.term_dict = {}
+        # Build term dictionary by iteration through words
+        for i in range(len(words) - 1):
+            current_word = words[i]
+            next_word = words[i + 1]
+            self.term_dict[current_word].append(next_word)
 
-        return None
-
+        return self.term_dict
+        
 
     def generate(self, seed_term=None, term_count=15):
 
-        # your code here ...
+        '''Building function for sentence generation'''
 
-        return None
+        # Confirm populated term_dict
+        if not self.term_dict:
+            self.get_term_dict()
+
+        current_word = seed_term or random.choice(list(self.term_dict.keys()))
+        sent = current_word
+
+        # generate sentence
+        for _ in range(term_count -1):
+            followers = self.term_dict[current_word]
+            if not followers:
+                break
+            current_word = random.choice(followers)
+            sent.append(current_word)
+
+        return ' '.join(sentence)
+    
+    # set corpus 
+    corpus = (
+    "Healing comes from taking responsibility: to realize that it is you - and no one else - "
+    "that creates your thoughts, your feelings, and your actions."
+    )
+    
+    

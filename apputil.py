@@ -50,16 +50,16 @@ class MarkovText(object):
 
         return ' '.join(sent)
     
-    # set corpus 
-    corpus = (
-    "Healing comes from taking responsibility: to realize that it is you - and no one else - "
-    "that creates your thoughts, your feelings, and your actions."
-    )
+# set corpus 
+corpus = (
+"Healing comes from taking responsibility: to realize that it is you - and no one else - "
+"that creates your thoughts, your feelings, and your actions."
+)
 
-    # create Markov object and term dictionary
-    text_gen = MarkovText(corpus)
-    term_dic = text_gen.get_term_dict()
-    text_gen.generate(term_count = 12)
+# create Markov object and term dictionary
+text_gen = MarkovText(corpus)
+term_dic = text_gen.get_term_dict()
+text_gen.generate(term_count = 12)
 
 
 

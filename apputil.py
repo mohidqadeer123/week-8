@@ -62,7 +62,7 @@ class MarkovText(object):
             if not followers:
                 
                 current_word = np.random.choice(list(self.term_dict.keys()))
-                sent.append(cur)
+                sent.append(current_word)
                 continue
             nxt = np.random.choice(followers)
             sent.append(nxt)

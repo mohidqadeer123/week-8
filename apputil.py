@@ -43,10 +43,14 @@ class MarkovText(object):
         if not self.term_dict:
             self.get_term_dict()
 
+        # if term_dic is empty
+        if not self.term_dict:
+            raise ValueError("Corpus is empty or could not generate term dictionary.")
+
         if seed_term is not None:
             if seed_term not in self.term_dict:
                 raise ValueError(f"Seed term '{seed_term}' not found in corpus.")
-                current_word = seed_term
+            current_word = seed_term
         else:
              current_word = random.choice(list(self.term_dict.keys()))
     
@@ -54,11 +58,15 @@ class MarkovText(object):
 
         # generate sentence
         for _ in range(term_count -1):
-            followers = self.term_dict[current_word]
+            followers = self.term_dict.get(current_word, [])
             if not followers:
-                break
-            current_word = random.choice(followers)
-            sent.append(current_word)
+                
+                current_word = np.random.choice(list(self.term_dict.keys()))
+                out.append(cur)
+                continue
+            nxt = np.random.choice(followers)
+            sent.append(nxt)
+            current_word = nxt
 
         return ' '.join(sent)
     

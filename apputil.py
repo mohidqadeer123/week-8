@@ -12,19 +12,25 @@ class MarkovText(object):
            in the resulting dictionary is automatically initialized with a list as its value.
         '''
         self.corpus = corpus
-        self.term_dict = defaultdict(list)
+        self.term_dict = None
 
     def get_term_dict(self):
 
         '''Building a function to tokenize over the words and create a term dictionary'''
         
-        words = self.corpus.split()
+        corpus = self.corpus if isinstance(self.corpus, str) else ""
+        # white space tokenization
+        tokens = corpus.split()
 
-        # Build term dictionary by iteration through words
-        for i in range(len(words) - 1):
-            current_word = words[i]
-            next_word = words[i + 1]
-            self.term_dict[current_word].append(next_word)
+        # Build token and list next tokens
+        d = defaultdict(list)
+        for i in range(len(tokens) - 1):
+            d[tokens[i]].append(tokens[i + 1])
+
+        if tokens:
+            _ = d[tokens[-1]]  
+
+        self.term_dict = dict(d)
 
         return self.term_dict
         

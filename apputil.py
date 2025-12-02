@@ -43,7 +43,13 @@ class MarkovText(object):
         if not self.term_dict:
             self.get_term_dict()
 
-        current_word = seed_term or random.choice(list(self.term_dict.keys()))
+        if seed_term is not None:
+            if seed_term not in self.term_dict:
+                raise ValueError(f"Seed term '{seed_term}' not found in corpus.")
+                current_word = seed_term
+        else:
+             current_word = random.choice(list(self.term_dict.keys()))
+    
         sent = [current_word]
 
         # generate sentence
